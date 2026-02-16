@@ -4,9 +4,9 @@ A personalized recommendation tool built with JavaScript.
 
 ## About this project
 
-**Your domain:** [Movie Reccomendations]
+**Your domain:** [Movie Reccomendations] https://chooseafilm.netlify.app/
 
-**Your question:** What should I [watch/eat/play/etc.]?
+**Your question:** What should I [watch.]?
 
 **Description:** [Choose a movie based on your mood, genre preference, and energy level. ]
 
