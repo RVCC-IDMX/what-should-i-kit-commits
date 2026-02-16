@@ -20,13 +20,15 @@ form.addEventListener("submit", function (event) {
   // Get user preferences from the form
   const preferences = {
     mood: document.getElementById("mood").value,
-    time: document.getElementById("time").value,
+    maxTime: document.getElementById("time").value,
     category: document.getElementById("category").value,
+    energy: document.getElementById("energy").value,
+    era: document.getElementById("era").value,
   };
 
   // Convert time to a number (it comes as a string from the form)
-  if (preferences.time) {
-    preferences.time = Number(preferences.time);
+  if (preferences.maxTime) {
+    preferences.maxTime = Number(preferences.maxTime);
   }
 
   // Find matching recommendations
@@ -46,13 +48,22 @@ function findRecommendations(preferences) {
 
   // Loop through all options and check each one
   for (let i = 0; i < data.options.length; i++) {
-    const item = data.options[i];
+    const movie = data.options[i];
 
-    // Use your matching function to check if this item matches
-    if (meetsAllCriteria(item, preferences)) {
-      matches.push(item);
+    // Use movie matching function to check if this movie matches
+    if (meetsAllMovieCriteria(movie, preferences)) {
+      // Calculate match score for sorting
+      const score = calculateMatchScore(movie, preferences);
+      matches.push({
+        movie: movie,
+        score: score,
+        message: getMovieMatchMessage(score)
+      });
     }
   }
+
+  // Sort by match score (highest first)
+  matches.sort((a, b) => b.score - a.score);
 
   return matches;
 }
@@ -85,22 +96,27 @@ function displayRecommendations(recommendations) {
  * @param {Object} item - The recommendation item
  * @returns {HTMLElement} - A div element with the recommendation details
  */
-function createRecommendationCard(item) {
+function createRecommendationCard(result) {
   const card = document.createElement("div");
   card.className = "recommendation-card";
+  
+  const movie = result.movie;
 
-  // TODO: Customize this to display your item's properties
-  //
   // SECURITY NOTE: Using innerHTML with template literals is safe here because
   // our data comes from data.js (hardcoded, not user input). If this data came
   // from user input or an external API, we'd need to sanitize it first to prevent
   // XSS (Cross-Site Scripting) attacks. For user-generated content, use textContent
   // instead, or a sanitization library. We'll learn more about this in later weeks!
   card.innerHTML = `
-    <h3>${item.title}</h3>
-    <p>Category: ${item.category}</p>
-    <p>Mood: ${item.mood}</p>
-    <p>Time: ${item.timeMinutes} minutes</p>
+    <div class="match-badge">${result.message}</div>
+    <h3>${movie.title}</h3>
+    <div class="movie-details">
+      <p><strong>Genre:</strong> ${movie.category}</p>
+      <p><strong>Mood:</strong> ${movie.mood}</p>
+      <p><strong>Runtime:</strong> ${movie.timeMinutes} minutes</p>
+      <p><strong>Energy level:</strong> ${movie.energy}</p>
+      <p><strong>Era:</strong> ${movie.era}</p>
+    </div>
   `;
 
   return card;

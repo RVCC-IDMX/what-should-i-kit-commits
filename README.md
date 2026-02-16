@@ -4,17 +4,17 @@ A personalized recommendation tool built with JavaScript.
 
 ## About this project
 
-**Your domain:** [Replace with your chosen domain]
+**Your domain:** [Movie Reccomendations]
 
 **Your question:** What should I [watch/eat/play/etc.]?
 
-**Description:** [Describe what your recommendation tool helps users decide]
+**Description:** [Choose a movie based on your mood, genre preference, and energy level. ]
 
 ## How it works
 
-1. User selects preferences from the form
-2. Matching functions filter the data based on preferences
-3. Recommendations are displayed on the page
+1. User selects movie preferences from the form
+2. Matching functions filter the data based on genre, mood, and time preferences
+3. Movie Recommendations are displayed on the page
 
 ## Files in this project
 

@@ -82,5 +82,129 @@ function getMatchMessage(matchScore) {
 // YOUR FUNCTIONS GO HERE
 // ============================================================
 
-// TODO: Write your own matching functions for your domain
-// Remember: You need at least 4 functions!
+/**
+ * Checks if a movie matches the desired category/genre
+ * @param {Object} movie - A movie from the data
+ * @param {string} desiredCategory - The genre the user wants
+ * @returns {boolean} - True if the movie matches the category
+ */
+function matchesCategory(movie, desiredCategory) {
+  // If no category preference, everything matches
+  if (!desiredCategory || desiredCategory === "any") {
+    return true;
+  }
+  
+  return movie.category === desiredCategory;
+}
+
+/**
+ * Checks if a movie matches the desired energy level
+ * @param {Object} movie - A movie from the data
+ * @param {string} desiredEnergy - The energy level the user wants
+ * @returns {boolean} - True if the movie matches the energy level
+ */
+function matchesEnergy(movie, desiredEnergy) {
+  // If no energy preference, everything matches
+  if (!desiredEnergy || desiredEnergy === "any") {
+    return true;
+  }
+  
+  return movie.energy === desiredEnergy;
+}
+
+/**
+ * Checks if a movie matches the desired era preference
+ * @param {Object} movie - A movie from the data
+ * @param {string} desiredEra - The era preference ("classic" or "modern")
+ * @returns {boolean} - True if the movie matches the era
+ */
+function matchesEra(movie, desiredEra) {
+  // If no era preference, everything matches
+  if (!desiredEra || desiredEra === "any") {
+    return true;
+  }
+  
+  return movie.era === desiredEra;
+}
+
+/**
+ * Checks if a movie is within the desired time range
+ * @param {Object} movie - A movie from the data
+ * @param {number} minMinutes - Minimum acceptable runtime
+ * @param {number} maxMinutes - Maximum acceptable runtime
+ * @returns {boolean} - True if the movie is within the time range
+ */
+function fitsTimeRange(movie, minMinutes, maxMinutes) {
+  // If no time constraints, everything fits
+  if (!minMinutes && !maxMinutes) {
+    return true;
+  }
+  
+  // Check only max time if min is not specified
+  if (!minMinutes && maxMinutes) {
+    return movie.timeMinutes <= maxMinutes;
+  }
+  
+  // Check only min time if max is not specified
+  if (minMinutes && !maxMinutes) {
+    return movie.timeMinutes >= minMinutes;
+  }
+  
+  // Check if movie fits within the range
+  return movie.timeMinutes >= minMinutes && movie.timeMinutes <= maxMinutes;
+}
+
+/**
+ * Checks if a movie meets all the user's preferences
+ * @param {Object} movie - A movie from the data
+ * @param {Object} preferences - Object containing all user preferences
+ * @returns {boolean} - True if movie matches ALL specified criteria
+ */
+function meetsAllMovieCriteria(movie, preferences) {
+  return (
+    matchesCategory(movie, preferences.category) &&
+    matchesMood(movie, preferences.mood) &&
+    matchesEnergy(movie, preferences.energy) &&
+    matchesEra(movie, preferences.era) &&
+    fitsTimeAvailable(movie, preferences.maxTime)
+  );
+}
+
+/**
+ * Calculates how many preferences a movie matches
+ * @param {Object} movie - A movie from the data
+ * @param {Object} preferences - Object containing user preferences
+ * @returns {number} - Number of criteria matched (0-5)
+ */
+function calculateMatchScore(movie, preferences) {
+  let score = 0;
+  
+  if (matchesCategory(movie, preferences.category)) score++;
+  if (matchesMood(movie, preferences.mood)) score++;
+  if (matchesEnergy(movie, preferences.energy)) score++;
+  if (matchesEra(movie, preferences.era)) score++;
+  if (fitsTimeAvailable(movie, preferences.maxTime)) score++;
+  
+  return score;
+}
+
+/**
+ * Returns a personalized message based on match quality
+ * @param {number} matchScore - How many criteria matched (0-5)
+ * @returns {string} - A recommendation message
+ */
+function getMovieMatchMessage(matchScore) {
+  if (matchScore === 5) {
+    return "🎯 Perfect match!";
+  } else if (matchScore === 4) {
+    return "⭐ Excellent choice";
+  } else if (matchScore === 3) {
+    return "👍 Good option";
+  } else if (matchScore === 2) {
+    return "🤔 Worth considering";
+  } else if (matchScore === 1) {
+    return "💭 Possible option";
+  } else {
+    return "❓ Maybe";
+  }
+}
