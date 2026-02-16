@@ -4,9 +4,9 @@ Rename this file to `ai-collaboration-summary.md` before submitting.
 
 ## Project overview
 
-**Domain:** [Your chosen domain]
+**Domain:** [https://chooseafilm.netlify.app/]
 
-**AI tools used:** [e.g., GitHub Copilot, Claude, ChatGPT]
+**AI tools used:** [GitHub Copilot]
 
 ---
 
@@ -14,11 +14,11 @@ Rename this file to `ai-collaboration-summary.md` before submitting.
 
 ### What I asked AI to help with
 
-[Describe the prompts you used to generate or refine your data]
+[I asked Co-Pilot to help create a list of 15-20 popular movies. ]
 
 ### What I verified or changed
 
-[List any corrections you made to AI-generated data]
+[I added some additional preferences fields.]
 
 ---
 
@@ -28,11 +28,13 @@ Rename this file to `ai-collaboration-summary.md` before submitting.
 
 | Function name | What it does        | How AI helped              |
 | ------------- | ------------------- | -------------------------- |
-| [name]        | [brief description] | [generated/refined/edited] |
+| [getMovieMatchMessage]        | [Gives recommendation score] | [edited content] |
 
 ### Code I had to fix or adjust
 
-[Describe any issues with AI-generated code and how you fixed them]
+[Describe any issues with AI-generated code and how you fixed them
+
+I mainly used AI to assist with finding data]
 
 ---
 
@@ -40,7 +42,7 @@ Rename this file to `ai-collaboration-summary.md` before submitting.
 
 ### What worked well
 
-[Describe effective prompts or AI interactions]
+[Describe effective prompts or AI interactions AI is good for generating data tables]
 
 ### What was challenging
 
@@ -48,7 +50,9 @@ Rename this file to `ai-collaboration-summary.md` before submitting.
 
 ### What I learned
 
-[Key takeaways about working with AI on code]
+[Key takeaways about working with AI on code 
+
+Have to customize movie preferences further for a better match]
 
 ---
 
@@ -56,7 +60,7 @@ Rename this file to `ai-collaboration-summary.md` before submitting.
 
 | Task              | Approximate time |
 | ----------------- | ---------------- |
-| Data design       | [time]           |
-| Writing functions | [time]           |
-| Connecting UI     | [time]           |
-| Testing/debugging | [time]           |
+| Data design       | [20 min]           |
+| Writing functions | [30 min]           |
+| Connecting UI     | [30 min]           |
+| Testing/debugging | [30 min]           |
